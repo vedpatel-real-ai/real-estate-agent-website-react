@@ -8,13 +8,16 @@
 // branch: /admin if admin_users says so, otherwise /dashboard (or
 // wherever they were headed before being sent to /login).
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { usePostAuthRedirect } from '../../hooks/usePostAuthRedirect';
+import { isDemoMode } from '../../lib/supabaseClient';
 import Button from '../../components/ui/Button';
 import './AuthPages.css';
 
 const Login = () => {
+  if (isDemoMode) return <Navigate to="/admin" replace />;
+
   // Handles the redirect once a session appears — from this form's own
   // signIn() call below, or from a Google/magic-link redirect landing
   // back on this page with a session already set.

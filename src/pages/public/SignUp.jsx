@@ -6,13 +6,16 @@
 // for every sign-up method, so this page never inserts into `profiles`
 // itself.
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { usePostAuthRedirect } from '../../hooks/usePostAuthRedirect';
+import { isDemoMode } from '../../lib/supabaseClient';
 import Button from '../../components/ui/Button';
 import './AuthPages.css';
 
 const Signup = () => {
+  if (isDemoMode) return <Navigate to="/admin" replace />;
+
   // Only fires the redirect if Supabase returns a session immediately
   // (i.e. email confirmation is disabled in the dashboard). If
   // confirmation is required, `session` stays null and we show the

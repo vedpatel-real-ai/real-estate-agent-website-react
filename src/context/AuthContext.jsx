@@ -1,14 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { demoAdminSession } from "../demo/demoAuth.js";
 import { isDemoMode, supabase } from "../lib/supabaseClient";
-
-const demoSession = {
-  access_token: "demo-access-token",
-  user: {
-    id: "demo-user",
-    email: "demo.user@dreamspace.example",
-    user_metadata: { full_name: "Demo User" },
-  },
-};
 
 /**
  * useAuth
@@ -48,13 +40,21 @@ const demoSession = {
  * }}
  */
 export function useAuth() {
-  const [session, setSession] = useState(undefined);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [session, setSession] = useState(isDemoMode ? demoAdminSession : undefined);
+  const [isAdmin, setIsAdmin] = useState(isDemoMode);
   const [isAdminLoading, setIsAdminLoading] = useState(false);
-  const adminCheckedForUserId = useRef(null);
+  const adminCheckedForUserId = useRef(isDemoMode ? demoAdminSession.user.id : null);
   const isSigningOutRef = useRef(false);
 
   useEffect(() => {
+    if (isDemoMode) {
+      setSession(demoAdminSession);
+      setIsAdmin(true);
+      setIsAdminLoading(false);
+      adminCheckedForUserId.current = demoAdminSession.user.id;
+      return undefined;
+    }
+
     let isMounted = true;
 
     supabase.auth.getSession().then(({ data }) => {
@@ -65,15 +65,7 @@ export function useAuth() {
         return;
       }
 
-      setSession(isDemoMode ? demoSession : (data.session ?? null));
-      // Debug: show initial session load
-      try {
-        // eslint-disable-next-line no-console
-        console.log(
-          "[useAuth] initial session",
-          data.session?.user?.id ?? null,
-        );
-      } catch (e) {}
+      setSession(isDemoMode ? demoAdminSession : (data.session ?? null));
     });
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
@@ -106,13 +98,14 @@ export function useAuth() {
   // see Plan §4's note on ProtectedRoute not re-fetching on every route
   // change.
   useEffect(() => {
-    const userId = session?.user?.id ?? null;
-
     if (isDemoMode) {
       setIsAdmin(true);
-      adminCheckedForUserId.current = userId;
+      setIsAdminLoading(false);
+      adminCheckedForUserId.current = demoAdminSession.user.id;
       return undefined;
     }
+
+    const userId = session?.user?.id ?? null;
 
     if (!userId) {
       setIsAdmin(false);
@@ -135,11 +128,6 @@ export function useAuth() {
       .maybeSingle()
       .then(({ data, error }) => {
         if (!isMounted) return;
-        // Debug: log admin lookup result
-        try {
-          // eslint-disable-next-line no-console
-          console.log("[useAuth] admin check", { userId, data, error });
-        } catch (e) {}
         setIsAdmin(!error && !!data?.is_admin);
         setIsAdminLoading(false);
       });
@@ -151,8 +139,8 @@ export function useAuth() {
 
   const signIn = useCallback(async (email, password) => {
     if (isDemoMode) {
-      setSession(demoSession);
-      return demoSession;
+      setSession(demoAdminSession);
+      return demoAdminSession;
     }
 
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -166,8 +154,8 @@ export function useAuth() {
 
   const signUp = useCallback(async (email, password, fullName) => {
     if (isDemoMode) {
-      setSession(demoSession);
-      return { user: demoSession.user, session: demoSession };
+      setSession(demoAdminSession);
+      return { user: demoAdminSession.user, session: demoAdminSession };
     }
 
     const { data, error } = await supabase.auth.signUp({
@@ -184,8 +172,8 @@ export function useAuth() {
 
   const signInWithGoogle = useCallback(async () => {
     if (isDemoMode) {
-      setSession(demoSession);
-      return { user: demoSession.user, session: demoSession };
+      setSession(demoAdminSession);
+      return { user: demoAdminSession.user, session: demoAdminSession };
     }
 
     const { data, error } = await supabase.auth.signInWithOAuth({
@@ -200,8 +188,8 @@ export function useAuth() {
 
   const signInWithMagicLink = useCallback(async (email) => {
     if (isDemoMode) {
-      setSession(demoSession);
-      return { user: demoSession.user, session: demoSession };
+      setSession(demoAdminSession);
+      return { user: demoAdminSession.user, session: demoAdminSession };
     }
 
     const { data, error } = await supabase.auth.signInWithOtp({
@@ -225,7 +213,7 @@ export function useAuth() {
   }, []);
 
   const updatePassword = useCallback(async (newPassword) => {
-    if (isDemoMode) return { user: demoSession.user };
+    if (isDemoMode) return { user: demoAdminSession.user };
 
     const { data, error } = await supabase.auth.updateUser({
       password: newPassword,
@@ -235,6 +223,13 @@ export function useAuth() {
   }, []);
 
   const signOut = useCallback(async () => {
+    if (isDemoMode) {
+      setSession(demoAdminSession);
+      setIsAdmin(true);
+      adminCheckedForUserId.current = demoAdminSession.user.id;
+      return;
+    }
+
     isSigningOutRef.current = true;
     setSession(null);
     setIsAdmin(false);

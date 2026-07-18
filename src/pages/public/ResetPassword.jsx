@@ -6,13 +6,15 @@
 //    PASSWORD_RECOVERY auth event once the recovery token in the URL is
 //    exchanged for a session); shows a "set new password" form instead.
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { supabase } from '../../lib/supabaseClient';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { isDemoMode, supabase } from '../../lib/supabaseClient';
 import { useAuth } from '../../context/AuthContext';
 import Button from '../../components/ui/Button';
 import './AuthPages.css';
 
 const ResetPassword = () => {
+  if (isDemoMode) return <Navigate to="/admin" replace />;
+
   const { resetPassword, updatePassword } = useAuth();
   const navigate = useNavigate();
 

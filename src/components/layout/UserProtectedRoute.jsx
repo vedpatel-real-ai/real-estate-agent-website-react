@@ -6,6 +6,7 @@
 import React from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { isDemoMode } from "../../lib/supabaseClient";
 import Spinner from "../ui/Spinner";
 
 const LOGIN_PATH = "/login";
@@ -13,6 +14,10 @@ const LOGIN_PATH = "/login";
 function UserProtectedRoute() {
   const { isAuthenticated, isLoading } = useAuth();
   const location = useLocation();
+
+  if (isDemoMode) {
+    return <Outlet />;
+  }
 
   if (isLoading) {
     return (

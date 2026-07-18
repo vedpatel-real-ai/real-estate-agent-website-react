@@ -12,6 +12,7 @@
 import React from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { isDemoMode } from "../../lib/supabaseClient";
 import Spinner from "../ui/Spinner";
 
 // The shared login route (Phase C). `/mppateL123` now redirects here
@@ -38,17 +39,9 @@ function ProtectedRoute() {
   } = useAuth();
   const location = useLocation();
 
-  // Debug: surface auth state when route guard runs
-  try {
-    // eslint-disable-next-line no-console
-    console.log("[ProtectedRoute] auth", {
-      pathname: location.pathname,
-      isAuthenticated,
-      isLoading,
-      isAdmin,
-      isAdminLoading,
-    });
-  } catch (e) {}
+  if (isDemoMode) {
+    return <Outlet />;
+  }
 
   // Wait while either the auth session is initializing OR the admin
   // check is in-flight for the current user. Expose `adminCheckedForUserId`
