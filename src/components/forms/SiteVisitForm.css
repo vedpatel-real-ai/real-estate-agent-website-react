@@ -1,0 +1,33 @@
+/* src/components/forms/SiteVisitForm.css (Package 4.3) */
+
+.site-visit-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.site-visit-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-sm);
+}
+
+@media (max-width: 480px) {
+  .site-visit-form__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.site-visit-form__success {
+  color: var(--color-success, #2e8b57);
+  font-size: 0.9rem;
+  margin: 0;
+  text-align: center;
+}
+
+.site-visit-form__error {
+  color: var(--color-danger, #c0392b);
+  font-size: 0.9rem;
+  margin: 0;
+  text-align: center;
+}

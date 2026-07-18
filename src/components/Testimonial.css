@@ -1,0 +1,180 @@
+/* Testimonial.css */
+
+/* Container for arranging multiple testimonials */
+.testimonial-container {
+  padding: var(--base-spacing);
+  margin: var(--base-spacing) auto;
+  max-width: 1200px;
+}
+
+.testimonial-container h2 {
+  text-align: center;
+  font-family: var(--primary-font, 'Merriweather', serif);
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: var(--base-spacing);
+  position: relative;
+}
+
+.testimonial-container h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--secondary-color);
+  margin: 8px auto 0;
+  border-radius: 2px;
+}
+
+/* Flex container for testimonial cards */
+.testimonial-list {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: var(--base-spacing);
+  overflow-x: auto;
+  padding: var(--base-spacing) 0;
+}
+
+/* Refined and slightly smaller testimonial card for a professional appearance */
+.testimonial {
+  background-color: var(--white);
+  border-radius: 12px;
+  padding: calc(var(--base-spacing) * 0.7); /* Slightly reduced padding */
+  margin: 0;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 220px; /* Reduced overall width */
+  flex: 0 0 auto;
+}
+
+/* Hover effect for subtle lift and increased shadow */
+.testimonial:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Circular photo styling with smooth transition */
+.testimonial-photo {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto calc(var(--base-spacing) * 1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: block;
+}
+
+/* Slight scale on hover for image */
+.testimonial:hover .testimonial-photo {
+  transform: scale(1.05);
+}
+
+/* Testimonial text styling for enhanced readability */
+.testimonial-text {
+  font-size: 0.98rem; /* Adjusted for improved readability */
+  font-style: italic;
+  color: #424242;
+  margin: calc(var(--base-spacing) * 0.5) 0;
+  line-height: 1.75; /* Increased line-height for better legibility */
+  padding: 0 15px;
+  position: relative;
+  padding-left: 25px;
+  border-left: 2px solid var(--secondary-color); /* Softer decorative accent */
+}
+
+/* Rating styling with a refined appearance */
+.testimonial-rating {
+  display: flex;
+  justify-content: center;
+  margin-bottom: calc(var(--base-spacing) * 0.5);
+  color: var(--secondary-color);
+  font-size: 1.1rem; /* Adjusted slightly from before */
+}
+
+/* Author attribution styling */
+.testimonial-author {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-top: 8px;
+}
+
+/* Role text styling */
+.testimonial-role {
+  font-size: 0.75rem;
+  color: #777;
+  margin-top: 4px;
+}
+
+/* Mobile-friendly adjustments */
+@media screen and (max-width: 768px) {
+  .testimonial-list {
+    flex-wrap: wrap; /* Allow testimonials to wrap on smaller screens */
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  /* Adjust the size of testimonial cards on mobile */
+  .testimonial {
+    max-width: 200px; /* Further reduced for mobile */
+    padding: calc(var(--base-spacing) * 0.6);
+    flex: 0 0 100%; /* Each card takes full width on small screens */
+  }
+
+  /* Adjust photo size on mobile */
+  .testimonial-photo {
+    width: 70px;
+    height: 70px;
+    margin-bottom: calc(var(--base-spacing) * 0.8);
+  }
+
+  /* Adjust text size for readability */
+  .testimonial-text {
+    font-size: 0.95rem;
+    margin-bottom: calc(var(--base-spacing) * 0.6);
+  }
+
+  .testimonial-rating {
+    font-size: 1rem;
+    margin-bottom: calc(var(--base-spacing) * 0.5);
+  }
+
+  .testimonial-author {
+    font-size: 0.85rem;
+  }
+
+  .testimonial-role {
+    font-size: 0.7rem;
+  }
+}
+
+/* Larger screens */
+@media screen and (min-width: 768px) {
+  .testimonial {
+    max-width: 250px; /* Maintaining professional look on larger screens */
+    padding: calc(var(--base-spacing) * 0.8);
+  }
+  
+  .testimonial-photo {
+    width: 90px;
+    height: 90px;
+    margin-bottom: calc(var(--base-spacing) * 1);
+  }
+  
+  .testimonial-text {
+    font-size: 1rem;
+    margin-bottom: calc(var(--base-spacing) * 0.8);
+  }
+  
+  .testimonial-rating {
+    font-size: 1.2rem;
+    margin-bottom: calc(var(--base-spacing) * 0.8);
+  }
+
+  .testimonial-author {
+    font-size: 0.9rem;
+  }
+}

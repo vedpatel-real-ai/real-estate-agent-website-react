@@ -1,0 +1,31 @@
+/* src/App.css - App-Specific Styles */
+
+/*
+  Note: Global resets, typography, and responsive utilities are already defined in your index.css.
+  The styles here apply additional tweaks and component-level adjustments for the App.
+*/
+
+/* App Main Container: Consistent Padding & Smooth Transitions */
+.app-main {
+  padding: var(--base-spacing);
+  transition: all var(--transition-speed) ease-in-out;
+}
+
+/* App Container for Legacy or Component-specific Use */
+.App {
+  text-align: center;
+}
+
+/* Utility Class for Smooth Interactions */
+.transition {
+  transition: all var(--transition-speed) ease-in-out;
+}
+
+/* Responsive Adjustments: Refining Padding on Smaller Screens */
+@media (max-width: 768px) {
+  .app-main {
+    padding: 10px;
+  }
+}
+
+/* Additional component or App-specific styles can be added below if needed */

@@ -1,0 +1,400 @@
+.property-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.2s ease;
+}
+
+.property-card-link:hover {
+  transform: none;
+}
+
+.property-card-link--list:hover {
+  transform: none;
+}
+
+.property-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid rgba(10, 23, 65, 0.08);
+  background: linear-gradient(180deg, #ffffff 0%, #fcfdff 100%);
+  box-shadow: 0 22px 45px rgba(15, 23, 42, 0.08);
+  transition:
+    transform 0.4s var(--ease-out-smooth),
+    box-shadow 0.4s var(--ease-out-smooth),
+    border-color 0.4s var(--ease-out-smooth);
+  will-change: transform;
+}
+
+.property-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 28px 60px rgba(15, 23, 42, 0.16);
+  border-color: rgba(10, 23, 65, 0.14);
+}
+
+.property-card--list {
+  flex-direction: row;
+  max-width: none;
+  min-width: 0;
+  width: 100%;
+  height: auto;
+  margin: 0 0 16px 0;
+}
+
+.property-card--list:hover {
+  transform: none;
+}
+
+.property-card--list .card-image {
+  width: 280px;
+  min-width: 280px;
+  height: auto;
+}
+
+.property-card--list .property-details {
+  flex-grow: 1;
+}
+
+.card-image {
+  position: relative;
+  overflow: hidden;
+  height: 260px;
+  background: linear-gradient(135deg, #eef3ff 0%, #f6f7fb 100%);
+}
+
+.card-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(2, 6, 46, 0.04) 0%,
+    rgba(2, 6, 46, 0.2) 100%
+  );
+  pointer-events: none;
+}
+
+.card-image-skeleton {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+}
+
+.property-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    transform 0.4s ease,
+    opacity 0.3s ease;
+  opacity: 0;
+}
+
+.property-image.is-loaded {
+  opacity: 1;
+}
+
+.card-image:hover .property-image {
+  transform: scale(1.04);
+}
+
+/* Both info badges live in one top-left stack, well clear of the
+   quick-action buttons (heart/WhatsApp), which own the top-right
+   corner exclusively. This keeps any combination of badges from ever
+   overlapping the action buttons or each other. */
+.property-badges-left {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  max-width: calc(100% - 110px);
+}
+
+.property-listing-badge {
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  text-transform: uppercase;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.16);
+}
+
+.property-listing-badge--buy {
+  background: linear-gradient(135deg, var(--accent-color), #eab93e);
+  color: var(--primary-color);
+}
+
+.property-listing-badge--rent {
+  background: linear-gradient(135deg, #0f8b8d, #159a9c);
+}
+
+.property-listing-badge--commercial {
+  background: linear-gradient(135deg, #4b3f8f, #5e4db8);
+}
+
+.property-featured-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(218, 186, 82, 0.45);
+  color: var(--primary-color);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.16);
+}
+
+.property-featured-badge svg {
+  color: var(--accent-color);
+  flex-shrink: 0;
+}
+
+.property-type {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  background: rgba(255, 255, 255, 0.94);
+  padding: 7px 12px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  z-index: 2;
+  backdrop-filter: blur(8px);
+}
+
+.type-icon {
+  color: var(--accent-color);
+  font-size: 0.92rem;
+}
+
+.card-quick-actions {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  gap: 8px;
+  z-index: 3;
+  padding: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.16);
+}
+
+.quick-action-btn {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+  color: var(--primary-color);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  transition:
+    transform var(--transition-fast),
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+  box-shadow: none;
+}
+
+.quick-action-btn svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.quick-action-btn:hover {
+  transform: translateY(-1px) scale(1.04);
+}
+
+.quick-action-btn--favourite.is-active {
+  color: #e0335f;
+  background: rgba(224, 51, 95, 0.1);
+}
+
+.quick-action-btn--whatsapp {
+  background: linear-gradient(135deg, #25d366, #1ebe5a);
+  color: var(--white);
+}
+
+.quick-action-btn--whatsapp:hover {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.property-details {
+  padding: 18px 18px 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.98),
+    rgba(247, 249, 252, 1)
+  );
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.property-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.property-title {
+  margin: 0;
+  font-size: 1.12rem;
+  color: var(--primary-color);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.property-rera-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  background: rgba(233, 180, 48, 0.16);
+  color: var(--primary-color);
+  border: 1px solid rgba(233, 180, 48, 0.25);
+  font-size: 0.69rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 5px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.property-location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.94rem;
+  color: #5b6472;
+  margin-bottom: 2px;
+}
+
+.property-location .icon {
+  color: var(--secondary-color);
+  font-size: 1rem;
+}
+
+.property-meta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid rgba(10, 23, 65, 0.08);
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.9rem;
+  color: #24324d;
+}
+
+.meta-icon {
+  color: var(--accent-color);
+  font-size: 1rem;
+}
+
+.meta-item--developer {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.meta-item--developer span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.property-price {
+  margin-top: 4px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.price {
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: var(--primary-color);
+}
+
+.price-per {
+  font-size: 0.86rem;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .property-card {
+    max-width: 100%;
+    min-height: auto;
+    min-width: unset;
+    border-radius: 20px;
+  }
+
+  .card-image {
+    height: 230px;
+  }
+
+  .property-card--list {
+    flex-direction: column;
+  }
+
+  .property-card--list .card-image {
+    width: 100%;
+    min-width: 0;
+    height: 230px;
+  }
+
+  .property-details {
+    padding: 16px;
+  }
+
+  .property-title {
+    font-size: 1.06rem;
+  }
+
+  .property-meta {
+    gap: 0.8rem;
+  }
+}

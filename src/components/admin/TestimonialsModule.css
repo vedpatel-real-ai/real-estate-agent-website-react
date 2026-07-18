@@ -1,0 +1,176 @@
+/* src/components/admin/TestimonialsModule.css
+   Package 5.5 — Testimonials Module + Settings.
+   Uses the shared token set (styles/tokens.css, Package 1.2) rather than
+   declaring its own :root block, matching PropertyModule.css/BlogModule.css/
+   LeadsModule.css precedent. Class prefix `tm-` (Testimonials Module) is its
+   own namespace, mirroring `lm-`/`bm-`/`pm-`. */
+
+.tm-module {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-lg) var(--spacing-md);
+  width: 100%;
+}
+
+.tm-section {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-light);
+  padding: var(--spacing-lg);
+}
+
+.tm-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.tm-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-secondary);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin: 0;
+}
+
+/* ---- Grid ---- */
+.tm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.tm-card__top {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
+}
+
+.tm-card__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.tm-card__avatar--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-color);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.tm-card__name {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-dark);
+}
+
+.tm-card__role {
+  margin: 0;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--color-gray);
+}
+
+.tm-card__stars {
+  color: var(--accent-color);
+  margin-bottom: var(--spacing-xs);
+}
+
+.tm-card__feedback {
+  font-size: 0.9rem;
+  color: var(--dark-color);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0 0 var(--spacing-sm);
+}
+
+.tm-card__actions {
+  display: flex;
+  gap: var(--spacing-xs);
+}
+
+/* ---- Add/Edit form (inside Modal) ---- */
+.tm-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+@media (max-width: 640px) {
+  .tm-module {
+    padding: var(--spacing-md) 0.75rem;
+  }
+
+  .tm-section {
+    padding: var(--spacing-md);
+  }
+
+  .tm-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tm-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tm-card__actions {
+    flex-direction: column;
+  }
+
+  .tm-form__image-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tm-form__image-preview {
+    width: 72px;
+    height: 72px;
+  }
+}
+.tm-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.tm-form__image-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.tm-form__image-preview {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--color-light-gray);
+}
+
+.tm-form__file-input {
+  display: none;
+}
+
+.tm-form__error {
+  color: #dc2626;
+  font-size: 0.85rem;
+  margin: 0;
+}

@@ -1,0 +1,244 @@
+/* src/pages/public/GuaranteedRentPage.css
+   Package 4.5 — new static page. Visual language matches the existing
+   Guaranteed Rent band already on HomePage.css (navy background, gold
+   accent icon/heading) so the two feel like one continuous feature
+   rather than two unrelated designs. */
+
+.guaranteed-rent-page {
+  overflow-x: hidden;
+}
+
+/* ---- Hero ---- */
+.gr-hero {
+  position: relative;
+  background: var(--background-gradient, linear-gradient(135deg, #0a1741, #1a2a5e));
+  color: var(--white);
+  padding: var(--section-spacing) var(--base-spacing);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gr-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.gr-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.gr-hero-icon {
+  color: var(--secondary-color);
+}
+
+.gr-hero-content h1 {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-family: var(--primary-font);
+  margin: 0;
+}
+
+.gr-hero-content p {
+  font-size: 1.1rem;
+  margin: 0 0 8px;
+  opacity: 0.92;
+}
+
+/* ---- Shared section spacing ---- */
+.gr-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gr-section {
+  padding: var(--section-spacing) 0;
+}
+
+.gr-section + .gr-section {
+  border-top: 1px solid var(--neutral-light);
+}
+
+.gr-section h2 {
+  font-size: 2rem;
+  color: var(--primary-color);
+  font-family: var(--primary-font);
+  margin-bottom: var(--base-spacing);
+  text-align: center;
+}
+
+.gr-section > p {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  text-align: center;
+}
+
+/* ---- How it works ---- */
+.gr-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--base-spacing);
+}
+
+.gr-step-card {
+  background: var(--white);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-light);
+  padding: var(--base-spacing);
+  text-align: center;
+}
+
+.gr-step-icon {
+  color: var(--secondary-color);
+  margin-bottom: 8px;
+}
+
+.gr-step-card h3 {
+  font-size: 1.15rem;
+  color: var(--primary-color);
+  margin: 0 0 6px;
+}
+
+.gr-step-card p {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* ---- Benefits ---- */
+.gr-benefits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--base-spacing);
+}
+
+.gr-benefit-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--white);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-light);
+  padding: var(--base-spacing);
+}
+
+.gr-benefit-icon {
+  flex-shrink: 0;
+  color: var(--primary-color);
+  margin-top: 2px;
+}
+
+.gr-benefit-card h3 {
+  font-size: 1.05rem;
+  margin: 0 0 4px;
+  color: var(--primary-color);
+}
+
+.gr-benefit-card p {
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+/* ---- Eligibility ---- */
+.gr-eligibility-list {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gr-eligibility-list li {
+  position: relative;
+  padding-left: 28px;
+  font-size: 1rem;
+}
+
+.gr-eligibility-list li::before {
+  content: '\2713';
+  position: absolute;
+  left: 0;
+  color: var(--secondary-color);
+  font-weight: 700;
+}
+
+/* ---- FAQs ---- */
+.gr-faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gr-faq-item {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-light);
+  padding: 14px 18px;
+}
+
+.gr-faq-item summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--primary-color);
+  list-style: none;
+}
+
+.gr-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.gr-faq-item summary::before {
+  content: '+';
+  display: inline-block;
+  width: 1em;
+  margin-right: 8px;
+  font-weight: 700;
+  color: var(--secondary-color);
+}
+
+.gr-faq-item[open] summary::before {
+  content: '\2212';
+}
+
+.gr-faq-item p {
+  margin: 10px 0 0;
+  font-size: 0.95rem;
+  color: var(--dark-color);
+}
+
+/* ---- CTA band ---- */
+.gr-cta-band {
+  text-align: center;
+  padding: var(--section-spacing) 0;
+}
+
+.gr-cta-band h2 {
+  font-size: 1.75rem;
+  color: var(--primary-color);
+  font-family: var(--primary-font);
+  margin-bottom: 6px;
+}
+
+.gr-cta-band p {
+  margin-bottom: var(--base-spacing);
+}
+
+.gr-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+}

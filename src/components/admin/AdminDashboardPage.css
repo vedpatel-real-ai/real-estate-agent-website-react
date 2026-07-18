@@ -1,0 +1,60 @@
+/* src/pages/admin/AdminDashboardPage.css
+   Package 5.1 — admin overview/index page, relocated + rebuilt from
+   pages/AdminDashboard.css (superseded). */
+
+.admin-overview {
+  max-width: 960px;
+}
+
+.admin-overview__title {
+  font-family: var(--heading-font);
+  font-size: 1.6rem;
+  color: var(--primary);
+  margin: 0 0 0.25rem;
+}
+
+.admin-overview__subtitle {
+  color: var(--text-light);
+  margin: 0 0 1.5rem;
+}
+
+.admin-overview__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.admin-overview__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  background-color: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--card-radius);
+  padding: 1.25rem;
+  text-decoration: none;
+  color: var(--gray-800);
+  transition: box-shadow var(--transition-fast) ease, transform var(--transition-fast) ease,
+    border-color var(--transition-fast) ease;
+}
+
+.admin-overview__card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.admin-overview__card-icon {
+  color: var(--accent-dark);
+}
+
+.admin-overview__card-title {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--primary);
+}
+
+.admin-overview__card-desc {
+  font-size: 0.88rem;
+  color: var(--text-light);
+}

@@ -1,0 +1,336 @@
+/* src/pages/Properties.css
+   Rebuilt for Package 4.2. Replaces the old duplicated
+   filter-sidebar/mobile-drawer markup and styles (now owned entirely by
+   `components/property/PropertyFilters.css`, Package 3.4) with styles
+   scoped to this page's own layout: the compact hero banner, the
+   sidebar/results two-column layout, the results grid/list toggle, and
+   pagination/empty/skeleton states. */
+
+.properties-page {
+  font-family: var(--body-font);
+  color: var(--dark-color);
+  line-height: 1.5;
+  background-color: var(--neutral-light);
+}
+
+/* ---- Compact hero banner ---- */
+.properties-hero {
+  position: relative;
+  min-height: 220px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  text-align: center;
+  background-image: url("https://placehold.co/1600x900/F5F1EA/2F3A36?text=Demo+Properties");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  padding: var(--spacing-lg) var(--spacing-sm);
+}
+
+.properties-hero .hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(2, 6, 111, 0.55), rgba(2, 6, 111, 0.7));
+  z-index: 1;
+}
+
+.properties-hero .hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 700px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.properties-hero h1 {
+  font-family: var(--heading-font);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  margin-bottom: 18px;
+  color: var(--white);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  line-height: 1.3;
+}
+
+.properties-hero__count {
+  display: inline-block;
+  margin-right: 0.2em;
+  color: var(--accent-color);
+  font-size: 1.25em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+.properties-breadcrumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+  opacity: 0.95;
+  color: #f8f8f8;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+}
+
+.properties-breadcrumb a {
+  color: var(--white);
+  text-decoration: none;
+}
+
+.properties-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.hero-search {
+  display: flex;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-medium);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.hero-search input {
+  flex: 1;
+  border: none;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.hero-search input:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: -2px;
+}
+
+.hero-search button {
+  border: none;
+  background: var(--accent-color);
+  color: var(--primary-color);
+  font-weight: 700;
+  padding: 0 22px;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.hero-search button:hover {
+  background: var(--secondary-color);
+}
+
+/* ---- Main layout ---- */
+.properties-main {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  padding-bottom: var(--spacing-xl);
+}
+
+.properties-sidebar {
+  flex-shrink: 0;
+  width: 260px;
+}
+
+.results-section {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ---- Results header ---- */
+.results-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: var(--spacing-md);
+}
+
+.results-count {
+  font-size: 0.95rem;
+  color: var(--dark-color);
+}
+
+.results-count strong {
+  color: var(--primary-color);
+}
+
+.results-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.results-sorting {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.results-sorting select {
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #ddd;
+  font-family: inherit;
+  font-size: 0.9rem;
+  background: var(--white);
+  cursor: pointer;
+}
+
+.view-toggle {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.view-toggle__btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: var(--white);
+  color: var(--dark-color);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.view-toggle__btn + .view-toggle__btn {
+  border-left: 1px solid #ddd;
+}
+
+.view-toggle__btn.is-active {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+/* ---- Results grid / list ---- */
+.properties-grid {
+  display: grid;
+  gap: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.properties-grid--grid {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  justify-items: stretch;
+}
+
+.properties-grid--grid .property-card-link,
+.properties-grid--grid .property-skeleton-card {
+  margin: 0;
+}
+
+.properties-grid--grid .property-card {
+  margin: 0;
+  max-width: none;
+  min-width: 0;
+  width: 100%;
+}
+
+.properties-grid--grid,
+.properties-grid--list {
+  row-gap: var(--spacing-md);
+  column-gap: var(--spacing-md);
+}
+
+.properties-grid--list {
+  grid-template-columns: 1fr;
+}
+
+.properties-grid.is-refetching {
+  opacity: 0.6;
+}
+
+/* ---- Skeleton loading state ---- */
+.property-skeleton-card {
+  background: var(--white);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+
+.property-skeleton-card__body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ---- Empty state ---- */
+.properties-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: var(--spacing-xl) var(--spacing-md);
+  background: var(--white);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.properties-empty-state__icon {
+  color: var(--accent-color);
+}
+
+.properties-empty-state h3 {
+  font-family: var(--heading-font);
+  color: var(--primary-color);
+  font-size: 1.2rem;
+}
+
+.properties-empty-state p {
+  color: #666;
+  max-width: 360px;
+}
+
+.properties-error {
+  background: var(--white);
+  border-radius: var(--card-radius);
+  padding: var(--spacing-lg);
+  text-align: center;
+  color: #b91c1c;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---- Pagination ---- */
+.properties-pagination {
+  margin-top: var(--spacing-lg);
+  justify-content: center;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 992px) {
+  .properties-main {
+    flex-direction: column;
+  }
+
+  .properties-sidebar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .properties-hero {
+    min-height: 180px;
+  }
+
+  .results-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .properties-grid--grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,271 @@
+/* src/components/property/PropertyFilters.css
+   Package 3.4 — single filter panel styled per the redesign plan's
+   "Filter sidebar (desktop)" / "Mobile filter" spec (Section: Properties
+   Page). Reuses tokens from styles/tokens.css rather than declaring a new
+   palette, per the existing design-token-system convention (Package 1.2).
+*/
+
+.property-filters {
+  position: relative;
+}
+
+/* ---- Mobile trigger button (hidden on desktop) ---- */
+.property-filters__trigger {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid var(--gray-300);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--primary);
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+
+.property-filters__trigger-badge {
+  margin-left: 2px;
+}
+
+/* ---- Shared panel content (rendered both inline on desktop and inside
+   the mobile drawer) ---- */
+.property-filters__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.property-filters__panel-header {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.property-filters__title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--primary);
+  margin: 0;
+}
+
+.property-filters__drawer-close {
+  background: none;
+  border: none;
+  color: var(--gray-600);
+  cursor: pointer;
+  padding: 4px;
+  line-height: 0;
+}
+
+.property-filters__section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.property-filters__label {
+  font-family: var(--font-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+/* ---- Chips (listing-type toggle, BHK, property type) ---- */
+.property-filters__toggle-group,
+.property-filters__chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.property-filters__chip {
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  background: var(--gray-100);
+  color: var(--gray-500);
+  font-family: var(--font-primary);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-fast) ease;
+  white-space: nowrap;
+}
+
+.property-filters__chip:hover {
+  background: var(--gray-200);
+}
+
+.property-filters__chip--active {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+}
+
+/* ---- Search field ---- */
+.property-filters__search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.property-filters__search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--gray-400);
+  pointer-events: none;
+}
+
+.property-filters__search-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px 0 36px;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--dark-color);
+}
+
+.property-filters__search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* ---- Location select ---- */
+.property-filters__select-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.property-filters__select {
+  width: 100%;
+  height: 40px;
+  padding: 0 32px 0 12px;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--dark-color);
+  background: var(--white);
+  appearance: none;
+}
+
+.property-filters__select-icon {
+  position: absolute;
+  right: 10px;
+  color: var(--gray-400);
+  pointer-events: none;
+}
+
+/* ---- Price range ---- */
+.property-filters__price-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.property-filters__price-row .ui-field {
+  flex: 1;
+}
+
+.property-filters__price-sep {
+  color: var(--gray-400);
+}
+
+/* ---- Footer actions ---- */
+.property-filters__footer {
+  display: flex;
+  gap: 10px;
+  padding-top: 4px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.property-filters__footer .ui-btn {
+  flex: 1;
+}
+
+/* ---- Desktop layout: static left-rail panel, no drawer chrome ---- */
+.property-filters__desktop {
+  display: block;
+  width: 260px;
+  padding: 20px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.property-filters__desktop .property-filters__drawer-close {
+  display: none;
+}
+
+.property-filters__desktop .property-filters__apply-btn {
+  display: none;
+}
+
+.property-filters__drawer {
+  display: none;
+}
+
+.property-filters__scrim {
+  display: none;
+}
+
+/* ---- Mobile: hide the static panel, show floating trigger + bottom
+   sheet drawer instead ---- */
+@media (max-width: 900px) {
+  .property-filters__trigger {
+    display: inline-flex;
+  }
+
+  .property-filters__desktop {
+    display: none;
+  }
+
+  .property-filters__panel-header {
+    display: flex;
+  }
+
+  .property-filters__scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+  }
+
+  .property-filters__drawer {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 85vh;
+    overflow-y: auto;
+    background: var(--white);
+    border-radius: 16px 16px 0 0;
+    box-shadow: var(--shadow-lg);
+    padding: 20px;
+    transform: translateY(100%);
+    transition: transform var(--transition-medium) var(--ease-out-smooth);
+    z-index: 1001;
+  }
+
+  .property-filters__drawer--open {
+    transform: translateY(0);
+  }
+
+  .property-filters__footer {
+    position: sticky;
+    bottom: 0;
+    background: var(--white);
+    margin: 0 -20px -20px;
+    padding: 12px 20px calc(12px + env(safe-area-inset-bottom));
+  }
+}

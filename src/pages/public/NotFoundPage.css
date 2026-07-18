@@ -1,0 +1,55 @@
+/* src/pages/public/NotFoundPage.css
+   Package 6.2 — new. Same centered-utility-page treatment as
+   ErrorBoundary.css, kept as a separate file per the app's
+   one-stylesheet-per-component/page convention (Section 9I). */
+
+.not-found-page {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--section-spacing) var(--base-spacing);
+  text-align: center;
+}
+
+.nf-content {
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.nf-icon {
+  color: var(--secondary-color);
+  margin-bottom: 4px;
+}
+
+.nf-code {
+  font-family: var(--primary-font);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  color: var(--primary-color);
+  line-height: 1;
+  margin: 0;
+}
+
+.nf-content h1 {
+  font-family: var(--primary-font);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.nf-message {
+  color: var(--dark-color);
+  margin: 0 0 8px;
+  line-height: 1.6;
+}
+
+.nf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}

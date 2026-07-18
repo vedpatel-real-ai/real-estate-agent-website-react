@@ -1,0 +1,201 @@
+/* src/components/layout/AdminLayout.css
+   Package 5.1 — Admin Layout + Routing.
+   Sidebar admin shell replacing the old .admin-dashboard tab-switcher
+   layout (pages/AdminDashboard.css, superseded by this package). Uses
+   the project's shared design tokens (Package 1.2) rather than
+   redeclaring a local palette. */
+
+.admin-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--gray-100);
+  font-family: var(--font-body);
+}
+
+/* ---- Top bar ---- */
+
+.admin-layout__topbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  background-color: var(--bg-dark);
+  color: var(--white);
+  padding: 0.75rem 1.25rem;
+  position: relative;
+  top: auto;
+  z-index: auto;
+  box-shadow: var(--shadow-md);
+}
+
+.admin-layout__menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: var(--radius-sm);
+}
+
+.admin-layout__brand {
+  font-family: var(--heading-font);
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.admin-layout__topbar-spacer {
+  flex: 1 1 auto;
+}
+
+.admin-layout__user {
+  font-size: 0.85rem;
+  color: var(--gray-300);
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-layout__logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: var(--white);
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition-fast) ease;
+}
+
+.admin-layout__logout:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* ---- Body (sidebar + content) ---- */
+
+.admin-layout__body {
+  flex: 1 1 auto;
+  display: flex;
+  min-height: 0;
+}
+
+.admin-layout__sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background-color: var(--white);
+  border-right: 1px solid var(--gray-200);
+  padding: 1.25rem 0.75rem;
+}
+
+.admin-layout__nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.admin-layout__nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--radius-md);
+  color: var(--gray-700);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition:
+    background-color var(--transition-fast) ease,
+    color var(--transition-fast) ease;
+}
+
+.admin-layout__nav-link:hover {
+  background-color: var(--gray-100);
+  color: var(--primary);
+}
+
+.admin-layout__nav-link--active {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.admin-layout__nav-link--active:hover {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.admin-layout__content {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 1.5rem;
+}
+
+.admin-layout__scrim {
+  display: none;
+}
+
+/* ---- Mobile ---- */
+
+@media (max-width: 900px) {
+  .admin-layout__topbar {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .admin-layout__menu-toggle {
+    display: inline-flex;
+  }
+
+  .admin-layout__brand {
+    font-size: 1rem;
+  }
+
+  .admin-layout__logout {
+    margin-left: auto;
+  }
+
+  .admin-layout__sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1100;
+    transform: translateX(-100%);
+    transition: transform var(--transition-medium) ease;
+    box-shadow: var(--shadow-lg);
+    overflow-y: auto;
+    padding-top: 4.5rem;
+  }
+
+  .admin-layout__sidebar--open {
+    transform: translateX(0);
+  }
+
+  .admin-layout__scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 1050;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .admin-layout__content {
+    padding: 1rem;
+  }
+
+  .admin-layout__user {
+    display: none;
+  }
+}

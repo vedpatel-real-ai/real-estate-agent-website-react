@@ -1,0 +1,408 @@
+/* src/components/admin/PropertyModule.css
+   Package 5.2 — Property Module Rebuild.
+   Uses the shared token set (styles/tokens.css, Package 1.2) rather than
+   declaring its own :root block, per that package's "single source of
+   design tokens" rule. */
+
+.pm-module {
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: var(--spacing-lg) var(--spacing-md);
+  width: 100%;
+}
+
+.pm-section {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-light);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  border: 1px solid var(--color-light-gray);
+  min-width: 0;
+}
+
+.pm-section--wide {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pm-form {
+  width: 100%;
+  max-width: 100%;
+}
+
+.pm-section h2 {
+  font-family: var(--font-secondary);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: var(--spacing-md);
+}
+
+/* ---- Tabs ---- */
+.pm-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xxs);
+  border-bottom: 2px solid var(--color-light-gray);
+  margin-bottom: var(--spacing-md);
+}
+
+.pm-tab {
+  background: none;
+  border: none;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-gray);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.pm-tab:hover {
+  color: var(--color-primary);
+}
+
+.pm-tab--active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+  font-weight: 600;
+}
+
+.pm-tab-panel {
+  padding-top: var(--spacing-xs);
+}
+
+.pm-subhead {
+  font-family: var(--font-secondary);
+  font-size: 1.05rem;
+  color: var(--color-dark);
+  margin: var(--spacing-md) 0 var(--spacing-xs);
+  padding-bottom: var(--spacing-xxs);
+  border-bottom: 1px solid var(--color-light-gray);
+}
+
+.pm-subhead:first-child {
+  margin-top: 0;
+}
+
+/* ---- Field grid ---- */
+.pm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.pm-grid--full {
+  grid-template-columns: 1fr;
+}
+
+@media (max-width: 1200px) {
+  .pm-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .pm-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pm-field label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: var(--spacing-xxs);
+}
+
+.pm-field input[type="text"],
+.pm-field input[type="number"],
+.pm-field input[type="date"],
+.pm-field input[type="url"],
+.pm-field select,
+.pm-field textarea {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--color-light-gray);
+  border-radius: var(--radius-md);
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  color: var(--color-dark);
+  background: var(--color-white);
+}
+
+.pm-field input:focus,
+.pm-field select:focus,
+.pm-field textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(26, 95, 156, 0.12);
+}
+
+.pm-field textarea {
+  resize: vertical;
+}
+
+.pm-field__hint {
+  font-size: 0.78rem;
+  color: var(--color-gray);
+  margin-top: var(--spacing-xxs);
+}
+
+.pm-toggle {
+  display: flex !important;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500 !important;
+  cursor: pointer;
+}
+
+.pm-toggle input {
+  width: auto !important;
+  accent-color: var(--color-primary);
+}
+
+.pm-image-preview {
+  display: block;
+  margin-top: var(--spacing-xs);
+  max-width: 220px;
+  max-height: 140px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-light-gray);
+}
+
+/* ---- Tag input ---- */
+.pm-tag-input {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0.5rem;
+  border: 1px solid var(--color-light-gray);
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+}
+
+.pm-tag-input input {
+  flex: 1 1 140px;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  padding: 0.25rem;
+  min-width: 120px;
+}
+
+.pm-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--color-accent);
+  color: var(--color-dark);
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.85rem;
+}
+
+.pm-tag button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1;
+  color: var(--color-gray);
+}
+
+.pm-tag button:hover {
+  color: var(--color-danger);
+}
+
+/* ---- Property type quick-picks ---- */
+.pm-quickpicks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.pm-quickpick {
+  border: 1px solid var(--color-light-gray);
+  background: var(--color-white);
+  color: var(--color-dark);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.7rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.pm-quickpick:hover {
+  border-color: var(--color-accent);
+}
+
+.pm-quickpick--active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-dark);
+  font-weight: 600;
+}
+
+/* ---- Config editor ---- */
+.pm-config-editor__header,
+.pm-config-editor__row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.pm-config-editor__header span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-gray);
+  text-transform: uppercase;
+}
+
+.pm-config-editor__row input {
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--color-light-gray);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+
+.pm-config-editor__remove {
+  background: none;
+  border: none;
+  color: var(--color-danger);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+/* ---- Form actions ---- */
+.pm-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--color-light-gray);
+}
+
+/* ---- Property list ---- */
+.pm-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--spacing-sm);
+}
+
+.pm-card {
+  border: 1px solid var(--color-light-gray);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s ease;
+}
+
+.pm-card:hover {
+  box-shadow: var(--shadow-medium);
+}
+
+.pm-card__image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.pm-card__details {
+  padding: var(--spacing-sm);
+  flex: 1;
+}
+
+.pm-card__badges {
+  display: flex;
+  gap: 0.3rem;
+  margin-bottom: 0.35rem;
+}
+
+.pm-card__details h3 {
+  font-size: 1.05rem;
+  color: var(--color-dark);
+  margin-bottom: 0.25rem;
+}
+
+.pm-card__details p {
+  font-size: 0.85rem;
+  color: var(--color-gray);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.15rem 0;
+}
+
+.pm-card__actions {
+  display: flex;
+  gap: 0.5rem;
+  padding: var(--spacing-sm);
+  border-top: 1px solid var(--color-light-gray);
+}
+
+@media (max-width: 640px) {
+  .pm-module {
+    padding: var(--spacing-md) 0.75rem;
+  }
+
+  .pm-section {
+    padding: var(--spacing-md);
+  }
+
+  .pm-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+
+  .pm-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pm-config-editor__header,
+  .pm-config-editor__row {
+    grid-template-columns: 1fr;
+  }
+
+  .pm-form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .pm-form-actions button,
+  .pm-form-actions .ui-btn,
+  .pm-form-actions .ant-btn {
+    width: 100%;
+  }
+
+  .pm-image-preview {
+    max-width: 100%;
+    max-height: 180px;
+  }
+
+  .pm-card__actions {
+    flex-direction: column;
+  }
+
+  .pm-list {
+    grid-template-columns: 1fr;
+  }
+}

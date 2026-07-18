@@ -1,0 +1,41 @@
+/* src/components/property/ConfigurationsTable.css (Package 4.3) */
+
+.config-table-container {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray-200);
+}
+
+.config-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.config-table thead {
+  background: var(--primary-color);
+}
+
+.config-table th {
+  padding: 12px 16px;
+  text-align: left;
+  color: var(--white);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.config-table td {
+  padding: 12px 16px;
+  border-top: 1px solid var(--gray-200);
+  color: var(--dark-color);
+}
+
+.config-table tbody tr:nth-child(even) {
+  background: var(--gray-100);
+}
+
+.config-table__price-cell {
+  font-weight: 600;
+  color: var(--primary-color);
+  white-space: nowrap;
+}

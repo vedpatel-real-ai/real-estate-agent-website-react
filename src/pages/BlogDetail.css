@@ -1,0 +1,131 @@
+/* src/pages/BlogDetail.css
+   Rebuilt for Package 4.4. Replaces the old bare `.blog-detail-page`
+   plain-paragraph layout with a breadcrumb + hero image + article +
+   related-posts layout, following the same `.container`-based page
+   shell already used by `Properties.css`/`PropertyDetailPage.css`. */
+
+.blog-detail-page {
+  font-family: var(--body-font);
+  color: var(--dark-color);
+  line-height: 1.5;
+  background-color: var(--white);
+  padding-bottom: var(--spacing-xl);
+}
+
+.blog-detail-container {
+  padding-top: var(--spacing-lg);
+  max-width: 860px;
+}
+
+/* ---- Back link + breadcrumb ---- */
+.blog-detail-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-decoration: none;
+  margin-bottom: 1rem;
+}
+
+.blog-detail-back-link:hover {
+  text-decoration: underline;
+}
+
+.blog-detail-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--neutral-dark);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.blog-detail-breadcrumb a {
+  color: var(--neutral-dark);
+  text-decoration: none;
+}
+
+.blog-detail-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.blog-detail-breadcrumb [aria-current='page'] {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* ---- Article ---- */
+.blog-detail-hero-image {
+  width: 100%;
+  max-height: 420px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--card-radius);
+  margin-bottom: 1.75rem;
+}
+
+.blog-detail-title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin-bottom: 1.25rem;
+  color: var(--primary-color);
+}
+
+/* ---- Error state ---- */
+.blog-detail-error {
+  text-align: center;
+  padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.blog-detail-error p {
+  color: var(--neutral-dark);
+  margin-bottom: 1.5rem;
+}
+
+/* ---- Related posts ---- */
+.blog-detail-related {
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--neutral-medium);
+}
+
+.blog-detail-related h2 {
+  margin-bottom: 1.25rem;
+}
+
+.blog-detail-related__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-md);
+}
+
+/* ---- Skeleton ---- */
+.blog-detail-skeleton__hero {
+  border-radius: var(--card-radius);
+  margin-bottom: 1.75rem;
+}
+
+.blog-detail-skeleton__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .blog-detail-hero-image {
+    max-height: 260px;
+  }
+
+  .blog-detail-related__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-detail-related__grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,46 @@
+/* src/components/property/AmenitiesGrid.css (Package 4.3) */
+
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--spacing-sm);
+}
+
+.amenities-grid__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--gray-100);
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+}
+
+.amenities-grid__item:hover {
+  background: var(--neutral-medium);
+}
+
+.amenities-grid__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.amenities-grid__label {
+  font-size: 0.92rem;
+  color: var(--dark-color);
+}
+
+@media (max-width: 480px) {
+  .amenities-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  }
+}

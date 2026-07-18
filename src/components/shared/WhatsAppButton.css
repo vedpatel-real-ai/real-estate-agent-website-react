@@ -1,0 +1,77 @@
+/* src/components/shared/WhatsAppButton.css */
+
+.wa-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #25d366;
+  color: var(--white);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform var(--transition-fast) ease, background-color var(--transition-fast) ease,
+    box-shadow var(--transition-fast) ease;
+}
+
+.wa-btn:hover,
+.wa-btn:focus-visible {
+  background-color: #1ebe5a;
+}
+
+.wa-btn__icon {
+  flex-shrink: 0;
+}
+
+/* Floating variant: fixed bottom-right 56px circle */
+.wa-btn--floating {
+  position: fixed;
+  right: clamp(16px, 4vw, 28px);
+  bottom: clamp(16px, 4vw, 28px);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  box-shadow: var(--shadow-lg);
+  z-index: 900;
+}
+
+.wa-btn--floating .wa-btn__icon {
+  font-size: 1.75rem;
+}
+
+.wa-btn--floating:hover,
+.wa-btn--floating:focus-visible {
+  transform: scale(1.08);
+}
+
+@media (max-width: 480px) {
+  .wa-btn--floating {
+    width: 48px;
+    height: 48px;
+  }
+
+  .wa-btn--floating .wa-btn__icon {
+    font-size: 1.5rem;
+  }
+}
+
+/* Inline variant: pill button with label, matching the shared Button
+   (.ui-btn) system exactly — same 30px pill radius and body font, not
+   just "sized to match" while quietly using a different radius/font. */
+.wa-btn--inline {
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  font-family: var(--body-font);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.wa-btn--inline .wa-btn__icon {
+  font-size: 1.1rem;
+}
+
+.wa-btn--inline:hover,
+.wa-btn--inline:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}

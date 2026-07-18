@@ -1,0 +1,317 @@
+/* src/components/admin/LeadsModule.css
+   Package 5.4 — Leads Module Rebuild.
+   Uses the shared token set (styles/tokens.css, Package 1.2) rather than
+   declaring its own :root block, matching PropertyModule.css/BlogModule.css
+   precedent. Class prefix `lm-` (Leads Module) is its own namespace since
+   this package's Blueprint row lists no shared `ui/` files to create. */
+
+.lm-module {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-lg) var(--spacing-md);
+  width: 100%;
+}
+
+.lm-section {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-light);
+  padding: var(--spacing-lg);
+}
+
+.lm-section h2 {
+  font-family: var(--font-secondary);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: var(--spacing-md);
+}
+
+/* ---- Stats row ---- */
+.lm-stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.lm-stat-card {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  background: var(--gray-100);
+  border: 1px solid var(--color-light-gray);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.lm-stat-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--primary-color);
+  color: var(--white);
+  flex-shrink: 0;
+}
+
+.lm-stat-card__body {
+  display: flex;
+  flex-direction: column;
+}
+
+.lm-stat-card__value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-dark);
+  line-height: 1.2;
+}
+
+.lm-stat-card__label {
+  font-size: 0.78rem;
+  color: var(--color-gray);
+}
+
+/* ---- Toolbar ---- */
+.lm-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
+}
+
+.lm-search {
+  position: relative;
+  flex: 1 1 260px;
+  min-width: 220px;
+}
+
+.lm-search__icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: var(--color-gray);
+  pointer-events: none;
+}
+
+.lm-search input {
+  width: 100%;
+  padding: 0.55rem 0.75rem 0.55rem 2.1rem;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  font-family: var(--body-font);
+  font-size: 0.9rem;
+}
+
+.lm-search input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.lm-select {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  font-family: var(--body-font);
+  font-size: 0.9rem;
+  background: var(--white);
+  color: var(--color-dark);
+}
+
+.lm-export-btn {
+  margin-left: auto;
+}
+
+/* ---- Table ---- */
+.lm-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--color-light-gray);
+  border-radius: var(--radius-md);
+}
+
+.lm-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 820px;
+}
+
+.lm-table thead th {
+  text-align: left;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-gray);
+  background: var(--gray-100);
+  padding: 0.75rem 0.9rem;
+  border-bottom: 1px solid var(--color-light-gray);
+  white-space: nowrap;
+}
+
+.lm-sort-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: none;
+  border: none;
+  font: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+.lm-row td {
+  padding: 0.75rem 0.9rem;
+  border-bottom: 1px solid var(--color-light-gray);
+  font-size: 0.88rem;
+  color: var(--color-dark);
+  vertical-align: middle;
+}
+
+.lm-row:last-child td {
+  border-bottom: none;
+}
+
+.lm-row__name {
+  font-weight: 600;
+}
+
+.lm-row__link {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.lm-row__link:hover {
+  text-decoration: underline;
+}
+
+.lm-status-select {
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  margin-bottom: 0.35rem;
+  display: block;
+}
+
+.lm-status-badge {
+  display: inline-flex;
+}
+
+.lm-row__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.lm-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+  color: var(--color-dark);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.lm-icon-btn:hover {
+  background: var(--gray-100);
+}
+
+.lm-icon-btn--active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--white);
+}
+
+.lm-icon-btn--whatsapp:hover {
+  background: #e9f9ef;
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.lm-icon-btn--danger:hover {
+  background: #fdecea;
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+/* ---- Expandable details / notes ---- */
+.lm-row--details td {
+  background: var(--gray-100);
+}
+
+.lm-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem 0.25rem;
+}
+
+.lm-details p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--color-dark);
+}
+
+.lm-details__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 720px) {
+  .lm-module {
+    padding: var(--spacing-md) 0.75rem;
+  }
+
+  .lm-section {
+    padding: var(--spacing-md);
+  }
+
+  .lm-stats-row {
+    grid-template-columns: 1fr;
+  }
+
+  .lm-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .lm-search,
+  .lm-select,
+  .lm-export-btn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .lm-export-btn {
+    margin-left: 0;
+  }
+
+  .lm-table {
+    min-width: 720px;
+  }
+
+  .lm-row__actions {
+    flex-wrap: wrap;
+  }
+
+  .lm-status-select {
+    width: 100%;
+  }
+
+  .lm-details__actions {
+    justify-content: flex-start;
+  }
+}

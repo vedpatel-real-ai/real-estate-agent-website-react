@@ -1,0 +1,181 @@
+/* src/styles/tokens.css
+   =====================================================================
+   Single source of design tokens for the whole app (Package 1.2).
+
+   Previously, 9 different page/component CSS files each declared their
+   own `:root { ... }` block (AboutUs.css, Properties.css, ContactUs.css,
+   HomePage.css, Footer.css, NavigationBar.css, PropertyDetail.css,
+   PropertyModule.css, PropertyCard.css), on top of the app-wide block in
+   the old src/index.css. Because `:root` variables are global, whichever
+   stylesheet happened to load last silently won for any name declared in
+   more than one file. This file replaces all of them.
+
+   Every custom-property name that existed in any of those 10 blocks is
+   preserved here (nothing renamed) so that every existing `var(--x)`
+   call site across the app keeps resolving. Where two files had defined
+   the *same* name with *different* values (a real design collision, not
+   just duplication), a single canonical value was chosen below — see the
+   inline notes on those. This is the intended effect of "single source
+   of design tokens": it removes accidental palette drift between pages.
+   ===================================================================== */
+
+:root {
+  /* ---- Brand palette (canonical — sourced from the former global
+     src/index.css, which was already loaded on every page) ---- */
+  --header-color: #000c8d;
+  --primary-color: #02066F;
+  --accent-color: #daba52;
+  --background-color: #FFFFFF;
+  --neutral-light: #f0f0f0;
+  --white: #ffffff;
+  --charcoal: #000000;
+  --black: #000000;
+
+  /* Collision: AboutUs/ContactUs/HomePage each declared their own
+     --secondary-color as a gold tone; unified to the brand accent gold. */
+  --secondary-color: #daba52;
+
+  /* Collision: AboutUs/ContactUs used --light-color for a soft page
+     background (#fafafa / #f5f5f5); unified to one off-white. */
+  --light-color: #f9fafb;
+  --off-white: #f9fafb;
+
+  /* Collision: AboutUs (#333333) / ContactUs (#444) --dark-color; kept
+     as a general body-text gray, distinct from --charcoal. */
+  --dark-color: #333333;
+
+  /* Button gradients */
+  --btn-bg: linear-gradient(45deg, #B8860B, #CD950C);
+  --btn-hover-bg: linear-gradient(45deg, #CD950C, #B8860B);
+
+  /* ---- Shadows (consolidated to one 3-step scale) ----
+     The 8 previously-independent shadow tokens below were each pulling a
+     different rgba/spread value for what was, in practice, the same
+     handful of "elevation levels" (subtle border-like separation,
+     resting card elevation, hovered/premium card elevation). Different
+     components (Button, PropertyCard, TestimonialCarousel, the homepage
+     CTA bands) each grabbed a different token for the same visual job,
+     so e.g. a property card and a testimonial card — both "the elevated
+     card in this section" — rendered with visibly different shadow
+     softness. Every one of the original names is preserved so no
+     existing `var(--x)` call site breaks, but they now all resolve to
+     one of exactly three real values. */
+  --shadow-sm: 0 1px 3px rgba(2, 6, 111, 0.07), 0 1px 2px rgba(2, 6, 111, 0.05);
+  --shadow-md: 0 8px 20px rgba(2, 6, 111, 0.10);
+  --shadow-lg: 0 16px 32px rgba(2, 6, 111, 0.12);
+
+  --shadow: var(--shadow-sm);
+  --shadow-light: var(--shadow-sm);
+  --shadow-medium: var(--shadow-md);
+  --shadow-premium: var(--shadow-lg);
+  --box-shadow: var(--shadow-lg);
+
+  /* ---- Typography ---- */
+  --heading-font: 'Playfair Display', serif;
+  --body-font: 'Montserrat', sans-serif;
+  /* Collision: AboutUs (Merriweather) vs HomePage (Playfair Display)
+     --primary-font; unified to Playfair Display to match --heading-font. */
+  --primary-font: 'Playfair Display', 'Georgia', serif;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-primary: 'Poppins', 'Segoe UI', sans-serif;
+  --font-secondary: 'Georgia', serif;
+
+  /* ---- Layout ---- */
+  --max-width: 1200px;
+  --container-width: 1280px;
+  --spacing-xxs: 0.375rem;
+  --spacing-xs: clamp(5px, 1vw, 10px);
+  --spacing-sm: clamp(10px, 2vw, 20px);
+  --spacing-md: clamp(15px, 3vw, 30px);
+  --spacing-lg: clamp(20px, 4vw, 40px);
+  --spacing-xl: clamp(30px, 5vw, 60px);
+  --base-spacing: 20px;
+  /* Collision: Footer (40px) / HomePage (50px) / AboutUs+ContactUs (80px)
+     --section-spacing; unified onto the existing responsive spacing
+     scale rather than a fixed px value. */
+  --section-spacing: clamp(30px, 5vw, 60px);
+
+  /* ---- Radius ---- */
+  --card-radius: 12px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius: 0.375rem;
+
+  /* ---- Transitions ---- */
+  --transition-fast: 0.2s;
+  --transition-medium: 0.3s;
+  --transition-slow: 0.5s;
+  --transition-speed: 0.3s;
+  --transition: all 0.25s ease;
+  --ease-out-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* ---- Extended brand shades (from Properties.css / PropertyDetail.css) ---- */
+  --primary-light: #2c5998;
+  --primary-dark: #01043d;
+  /* Collision: this was previously its own, visibly different navy
+     (#1c3c68) used for admin dashboard/property-filter backgrounds,
+     while the rest of the app used --primary-color (#02066F) — the two
+     read as different shades of blue side by side. Aliased to the
+     canonical brand navy so there is exactly one "primary blue" site-wide. */
+  --primary: var(--primary-color);
+  /* Collision: Properties.css's --accent-color was red (#e74c3c), a
+     one-off departure from the brand gold used everywhere else; unified
+     to the brand accent gold, with --accent-hover as its darker step. */
+  --accent-hover: #c9a83f;
+  --accent: #c4a542;
+  --accent-light: #e0c76a;
+  --accent-dark: #a17d2d;
+  --neutral-medium: #e9ecef;
+  --neutral-dark: #6c757d;
+  /* Collision: Properties.css (#495057) / HomePage.css (#3a4764)
+     --text-light; unified to the neutral gray reading tone. */
+  --text-light: #495057;
+
+  /* Grayscale (from PropertyDetail.css) */
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+
+  /* Nav/Footer specific (from NavigationBar.css / Footer.css) */
+  --bg-dark: #001f3f;
+  --bg-nav: #001f3f;
+  --text-color: #ffffff;
+
+  /* Homepage gradient (unique name, no collision) */
+  --background-gradient: linear-gradient(135deg, #0a1741, #1a2a5e);
+
+  /* ---- Admin form palette (from PropertyModule.css — separate
+     `color-*` namespace, deliberately left independent of the public
+     site's brand tokens above since it never collided with them).
+     NOTE: kept intentionally namespaced — public-facing components
+     (e.g. Badge's success/warning/danger/info variants) should not be
+     used on the public site with these colors, since they read as a
+     generic SaaS dashboard palette rather than the navy/gold brand. If
+     a public "status" tag is ever needed, give it its own brand-colored
+     variant instead of reaching for these. ---- */
+  --color-primary: #1a5f9c;
+  --color-primary-hover: #0f4a7d;
+  --color-secondary: #e2a951;
+  --color-secondary-hover: #c99342;
+  --color-success: #2e8b57;
+  --color-success-hover: #236b43;
+  --color-warning: #e67e22;
+  --color-warning-hover: #d35400;
+  --color-danger: #c0392b;
+  --color-danger-hover: #a33025;
+  --color-dark: #2c3e50;
+  --color-gray: #7f8c8d;
+  --color-light-gray: #ecf0f1;
+  --color-accent: rgba(224, 234, 246, 0.7);
+  --color-bg: #f8fafc;
+  --color-white: #fff;
+}

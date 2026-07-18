@@ -1,0 +1,306 @@
+/* NOTE (Design Audit §1.9): the `* { box-sizing: border-box; }` reset
+   and redundant `body` background rule that used to live here have
+   been removed — both are already established once, globally, in
+   src/styles/global.css. Duplicating them here served no purpose and
+   was one of five places this same reset was declared across the app. */
+
+/* Navbar Container Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px; /* Slightly more breathing room on mobile */
+  min-height: 58px;
+  background-color: var(--bg-nav);
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all var(--transition-speed) ease;
+}
+
+/* Navbar Effect on Scroll */
+.navbar.scrolled {
+  background-color: rgba(0, 31, 63, 0.92);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Navbar Logo Styles */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo a {
+  font-family: var(--font-heading);
+  font-size: 1.5rem; /* Slightly smaller for mobile */
+  font-weight: 600;
+  color: var(--secondary-color);
+  text-decoration: none;
+  text-shadow: 0.5px 0.5px 3px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.navbar-logo a span {
+  color: white;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+/* Overlay for closing mobile navigation by tapping the page */
+.navbar-overlay {
+  position: fixed;
+  inset: 0;
+  border: 0;
+  background: rgba(3, 10, 22, 0.38);
+  backdrop-filter: blur(2px);
+  z-index: 998;
+  cursor: pointer;
+}
+
+/* Hamburger Menu Icon (for Mobile) */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-color);
+  transition:
+    transform var(--transition-speed) ease,
+    color var(--transition-speed) ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hamburger:hover {
+  color: var(--secondary-color);
+  transform: scale(1.05);
+}
+
+.hamburger-bar {
+  width: 22px;
+  height: 2px;
+  border-radius: 999px;
+  background-color: currentColor;
+  transition:
+    transform var(--transition-speed) ease,
+    opacity var(--transition-speed) ease;
+  transform-origin: center;
+}
+
+.hamburger.open .hamburger-bar:nth-child(1) {
+  transform: rotate(-45deg) translate(-4px, 6px);
+}
+
+.hamburger.open .hamburger-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open .hamburger-bar:nth-child(3) {
+  transform: rotate(45deg) translate(-4px, -6px);
+}
+
+/* Navbar Menu List - Mobile Defaults */
+.navbar-menu {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 8px;
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  width: min(220px, calc(100vw - 16px));
+  max-height: min(72dvh, calc(100dvh - 16px));
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(110%);
+  transition:
+    transform var(--transition-speed) ease,
+    opacity var(--transition-speed) ease;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+  border-radius: 14px;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 31, 63, 0.98),
+    rgba(0, 31, 63, 0.94)
+  );
+  z-index: 999;
+}
+
+/* Active state for Mobile Menu */
+.navbar-menu.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+.navbar-menu li {
+  width: 100%;
+}
+
+/* Navbar Menu Items & Links */
+.navbar-menu li a {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: all var(--transition-speed);
+  width: 100%;
+}
+
+.navbar-menu li a:hover,
+.navbar-menu li a.active {
+  color: var(--secondary-color);
+  background: rgba(218, 186, 82, 0.14);
+  border-color: rgba(218, 186, 82, 0.24);
+  transform: translateY(-1px);
+}
+
+.nav-icon {
+  font-size: 0.95rem;
+}
+
+/* WhatsApp nav CTA — sits as its own list item alongside the route
+   links so it collapses/expands with the mobile menu like everything
+   else. Per Design Audit ("Navigation Bar" section), WhatsApp's brand
+   green is intentionally kept off the primary nav bar — the site's
+   most persistently visible surface — and reserved for the floating
+   WhatsApp button, where users already expect it. This entry point
+   uses the site's own gold/navy palette instead: a gold-outline
+   treatment that reads as "part of this brand's nav," not a
+   third-party widget bolted on. */
+.navbar-whatsapp-item {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-whatsapp-btn.ui-btn--primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 2.25rem;
+  padding: 0.55rem 0.8rem;
+  border-width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    135deg,
+    rgba(218, 186, 82, 0.16),
+    rgba(218, 186, 82, 0.28)
+  );
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  box-shadow:
+    inset 0 0 0 1px rgba(218, 186, 82, 0.16),
+    0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.navbar-whatsapp-btn.ui-btn--primary:hover {
+  background: var(--accent-color);
+  color: var(--primary-color);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(218, 186, 82, 0.25);
+}
+
+.navbar-whatsapp-btn .nav-icon {
+  font-size: 1.05rem;
+  display: inline-flex;
+  min-width: 1.05rem;
+}
+
+.navbar-whatsapp-btn .nav-label {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* Media Query for Larger Screens */
+@media (min-width: 768px) {
+  .navbar {
+    padding: 10px 36px; /* Keep the desktop bar professional and slightly thicker */
+    min-height: 56px;
+  }
+
+  .hamburger {
+    display: none; /* Hide hamburger when full nav is visible */
+  }
+
+  .navbar-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: static;
+    gap: 20px;
+    width: auto;
+    height: auto;
+    max-height: none;
+    padding: 0;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+    box-shadow: none;
+    border-radius: 0;
+    background-color: transparent; /* Remove background color on desktop */
+  }
+
+  .navbar-menu li {
+    width: auto;
+  }
+
+  .navbar-menu li a {
+    padding: 0 6px;
+    border-radius: 0;
+    border: none;
+    width: auto;
+    background: transparent;
+    line-height: 1.1;
+  }
+
+  .navbar-menu li a:hover,
+  .navbar-menu li a.active {
+    color: var(--secondary-color);
+    background: transparent;
+    border-color: transparent;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .navbar-menu li {
+    margin-bottom: 0;
+  }
+
+  .navbar-logo a {
+    font-size: 1.9rem; /* Increase logo size for desktop */
+  }
+
+  .navbar-menu li a {
+    font-size: 0.98rem;
+  }
+
+  .navbar-whatsapp-item {
+    margin-left: 4px;
+  }
+}

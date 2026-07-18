@@ -1,0 +1,494 @@
+/* src/styles/global.css
+   Base reset, layout primitives, and shared component styles, split out
+   of the old src/index.css as part of Package 1.2 (Design Token
+   System). Depends on styles/tokens.css and styles/typography.css, so
+   this file must be imported after both.
+
+   Note: the old src/index.css also imported animate.css globally, but
+   Part A Section 9F/9L of the Blueprint flagged it as an orphaned
+   import (only the unused HeroSection.jsx referenced animate.css
+   classes) and Section 13's verification notes for this package
+   recommend dropping it while this file is being split out. It has been
+   removed here rather than carried forward.
+   ===================================================================== */
+
+/* ==================================================
+   Reset & Base Styles
+================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--body-font);
+  background-color: var(--background-color);
+  color: var(--charcoal);
+  line-height: 1.6;
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  overflow-x: hidden;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Minimum accessible touch-target size, sitewide (Design Audit §"Home
+   Page" — previously only applied on the homepage via a local rule in
+   HomePage.css; promoted here so every page gets the same tap-target
+   guarantee, not just the one visitors happen to land on first). */
+button, a, input, select, textarea {
+  min-height: 11px;
+  min-width: 11px;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color var(--transition-medium) var(--ease-out-smooth);
+}
+
+a:hover {
+  color: var(--accent-color);
+}
+
+/* Premium animated link */
+.animated-link {
+  position: relative;
+}
+
+.animated-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--accent-color);
+  transition: width var(--transition-slow) var(--ease-out-smooth);
+}
+
+.animated-link:hover::after {
+  width: 100%;
+}
+
+/* ==================================================
+   Layout Containers
+================================================== */
+.container {
+  width: 90%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-sm);
+}
+
+/* Responsive Grid System */
+.grid {
+  display: grid;
+  gap: var(--spacing-sm);
+  grid-template-columns: repeat(12, 1fr);
+}
+
+/* Base column spans */
+.col-1, .col-2, .col-3, .col-4, .col-6, .col-8, .col-12 {
+  grid-column: span 12;
+}
+
+/* ==================================================
+   Header & Navigation
+   NOTE (Design Audit §1.1): the legacy bare `header`/`header nav`/
+   `.menu-toggle`/`.mobile-menu` rules that used to live here have been
+   removed. The real navigation bar (`src/components/NavigationBar.jsx`)
+   renders a standalone `<nav className="navbar">`, not a `<header>`,
+   and owns its own styles in NavigationBar.css. The legacy rules below
+   were dead for that component but were *not* harmless: several public
+   pages (About Us, Properties, Blog, Guaranteed Rent) render their hero
+   section in a bare `<header>` element for semantic/landmark reasons,
+   which meant these page-specific heroes were silently inheriting
+   sticky positioning, a translucent blurred background, and box-shadow
+   meant for a totally different, now-removed nav design. Removing this
+   block fixes that unintended cross-contamination.
+================================================== */
+
+/* ==================================================
+   Buttons
+   NOTE (Design Audit §1.1): the legacy `.btn`/`.btn-small`/`.btn-large`/
+   `.btn-full` pill-button rules that used to live here have been
+   removed. No page or component on the public site references `.btn`
+   — every real button/link-styled-as-button goes through the shared
+   `Button` component (`src/components/ui/Button.jsx`, classes
+   `.ui-btn*`), which is the single source of truth for button visuals
+   sitewide.
+================================================== */
+
+/* ==================================================
+   Form Styles
+   NOTE (Design Audit §1.1): the legacy bare `form`/`form input`/
+   `form label` styling that used to live here has been removed. Every
+   real `<form>` on the public site (search bars, contact/inquiry/
+   site-visit forms, the footer newsletter form) renders inside its own
+   page- or component-scoped class and fully owns its background,
+   padding, and input styling there (several through the shared
+   `ui/Input` and `ui/Textarea` primitives) — this bare-element layer
+   was pure legacy weight, not something any of them depended on.
+================================================== */
+
+/* ==================================================
+   Card Component & Hero Section
+   NOTE (Design Audit §1.1): the legacy `.cards-grid`/`.card`/
+   `.hero-section` rules that used to live here have been removed —
+   neither is referenced anywhere in the app. Every real card on the
+   public site is a bespoke, page-specific class (`.property-card`,
+   `.blog-card`, `.testimonial`, `.aboutus-offer-card`, `.team-card`,
+   `.contact-details`) and every real hero is its own page-specific
+   class (`.homepage-hero`, `.aboutus-hero`, `.properties-hero`, etc.).
+   Consolidating those into a shared primitive is a larger, deliberate
+   design decision (see Design Audit §1.1 and §1.4 recommendations) and
+   is intentionally left for a follow-up pass rather than done as part
+   of this cleanup, since it changes visual output across many
+   components at once.
+================================================== */
+
+/* ==================================================
+   Footer
+================================================== */
+footer {
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: var(--spacing-xl) 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+}
+
+footer .footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+  padding: 0 var(--spacing-sm);
+  position: relative;
+  z-index: 2;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+footer .footer-content div {
+  transition: transform var(--transition-medium) ease;
+}
+
+footer .footer-content div:hover {
+  transform: translateY(-5px);
+}
+
+footer h3 {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  margin-bottom: var(--spacing-sm);
+  color: var(--white);
+}
+
+footer p {
+  margin: var(--spacing-sm) 0 0;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: var(--white);
+  font-weight: bold;
+  position: relative;
+}
+
+footer a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--accent-color);
+  transition: width var(--transition-slow) var(--ease-out-smooth);
+}
+
+footer a:hover {
+  color: var(--accent-color);
+}
+
+footer a:hover::after {
+  width: 100%;
+}
+
+.footer-bottom {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.85rem;
+}
+
+/* ==================================================
+   Animations
+================================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subtleFloat {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Animation Classes */
+.animate-fade-up {
+  animation: fadeInUp var(--transition-slow) var(--ease-out-smooth) forwards;
+}
+
+.animate-fade-down {
+  animation: fadeInDown var(--transition-slow) var(--ease-out-smooth) forwards;
+}
+
+.animate-float {
+  animation: subtleFloat 6s ease-in-out infinite;
+}
+
+/* Staggered animations */
+.stagger-animation > * {
+  opacity: 0;
+}
+
+.stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-animation > *:nth-child(5) { animation-delay: 0.5s; }
+.stagger-animation > *:nth-child(n+6) { animation-delay: 0.6s; }
+
+/* Scroll-triggered animations */
+.reveal-on-scroll {
+  opacity: 0;
+  transition: opacity var(--transition-slow) ease,
+              transform var(--transition-slow) var(--ease-out-smooth);
+}
+
+.reveal-on-scroll.from-bottom { transform: translateY(50px); }
+.reveal-on-scroll.from-left { transform: translateX(-50px); }
+.reveal-on-scroll.from-right { transform: translateX(50px); }
+
+.reveal-on-scroll.visible {
+  opacity: 1;
+  transform: translate(0);
+}
+
+/* ==================================================
+   Property-Specific Components
+================================================== */
+.property-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+  margin: var(--spacing-sm) 0;
+}
+
+.property-stat-item {
+  background-color: var(--neutral-light);
+  border-radius: 10px;
+  padding: var(--spacing-sm);
+  text-align: center;
+  transition: all var(--transition-medium) ease;
+}
+
+.property-stat-item:hover {
+  background-color: var(--white);
+  box-shadow: var(--shadow-light);
+  transform: translateY(-5px);
+}
+
+.property-stat-item h4 {
+  font-size: 0.9375rem;
+  margin-bottom: 5px;
+}
+
+.property-stat-item p {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.price-tag {
+  background: linear-gradient(45deg, var(--primary-color), #2c3591);
+  color: var(--white);
+  padding: 0.75rem 1.25rem;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1.125rem;
+  display: inline-block;
+  margin-bottom: var(--spacing-sm);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.property-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin: var(--spacing-sm) 0;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.gallery-item img {
+  transition: transform var(--transition-slow) var(--ease-out-smooth);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+/* ==================================================
+   Utility Classes
+================================================== */
+/* Flex utilities */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-sm { gap: var(--spacing-sm); }
+.gap-md { gap: var(--spacing-md); }
+.gap-lg { gap: var(--spacing-lg); }
+
+/* Spacing utilities */
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: var(--spacing-xs); }
+.mt-2 { margin-top: var(--spacing-sm); }
+.mt-3 { margin-top: var(--spacing-md); }
+.mt-4 { margin-top: var(--spacing-lg); }
+.mt-5 { margin-top: var(--spacing-xl); }
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: var(--spacing-xs); }
+.mb-2 { margin-bottom: var(--spacing-sm); }
+.mb-3 { margin-bottom: var(--spacing-md); }
+.mb-4 { margin-bottom: var(--spacing-lg); }
+.mb-5 { margin-bottom: var(--spacing-xl); }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+/* ==================================================
+   Media Queries for Responsiveness
+================================================== */
+@media (min-width: 576px) {
+  .property-stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .property-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  /* Column spans for tablet */
+  .col-md-1 { grid-column: span 1; }
+  .col-md-2 { grid-column: span 2; }
+  .col-md-3 { grid-column: span 3; }
+  .col-md-4 { grid-column: span 4; }
+  .col-md-6 { grid-column: span 6; }
+  .col-md-8 { grid-column: span 8; }
+  .col-md-12 { grid-column: span 12; }
+
+  footer .footer-content {
+    text-align: left;
+  }
+
+  .text-md-center { text-align: center; }
+  .text-md-left { text-align: left; }
+  .text-md-right { text-align: right; }
+}
+
+@media (min-width: 992px) {
+  /* Column spans for desktop */
+  .col-lg-1 { grid-column: span 1; }
+  .col-lg-2 { grid-column: span 2; }
+  .col-lg-3 { grid-column: span 3; }
+  .col-lg-4 { grid-column: span 4; }
+  .col-lg-6 { grid-column: span 6; }
+  .col-lg-8 { grid-column: span 8; }
+  .col-lg-12 { grid-column: span 12; }
+
+  .cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+
+  .property-gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .text-lg-center { text-align: center; }
+  .text-lg-left { text-align: left; }
+  .text-lg-right { text-align: right; }
+}
+
+@media (min-width: 1200px) {
+  /* Column spans for large desktop */
+  .col-xl-1 { grid-column: span 1; }
+  .col-xl-2 { grid-column: span 2; }
+  .col-xl-3 { grid-column: span 3; }
+  .col-xl-4 { grid-column: span 4; }
+  .col-xl-6 { grid-column: span 6; }
+  .col-xl-8 { grid-column: span 8; }
+  .col-xl-12 { grid-column: span 12; }
+
+  footer .footer-content {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

@@ -1,0 +1,531 @@
+/* ===================================
+   Utility & Animation
+==================================== */
+/* box-sizing reset removed — already covered globally by
+   src/styles/global.css (Design Audit §1.9). */
+
+.aboutus-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--base-spacing);
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp var(--transition-speed) ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================================
+   Hero Section with Parallax & Fade-In
+==================================== */
+.aboutus-hero {
+  position: relative;
+  height: 80vh;
+  background: var(
+    --background-gradient,
+    url("https://placehold.co/1600x900/F5F1EA/2F3A36?text=DreamSpace+Properties") center/cover no-repeat
+  );
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.aboutus-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+.aboutus-hero-content {
+  position: relative;
+  z-index: 2;
+  color: var(--white);
+  padding: 0 var(--base-spacing);
+  animation: fadeInUp 0.8s ease-out forwards;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.aboutus-hero h1 {
+  font-size: 3.4rem;
+  margin-bottom: var(--base-spacing);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  font-family: var(--primary-font);
+  color: var(--white);
+}
+
+.aboutus-hero-subtitle {
+  font-size: 1.25rem;
+  margin-bottom: var(--base-spacing);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+  color: #f8f8f8;
+}
+
+/* CTA buttons on this page now render through the shared <Button>
+   component (`.ui-btn--primary` / `.ui-btn--outline`) instead of the
+   bespoke `.aboutus-cta-button` class, so every "click this to talk to
+   us" action across the site shares one visual language — see Design
+   Audit §1.6. The bespoke button rules that used to live here have
+   been removed. */
+
+/* ===================================
+   About Story Section
+   Restructured (Package 4.6 — content-preserving redesign) into three
+   readable movements instead of one unbroken text column:
+     1. aboutus-story-header  — opening statement (lead paragraph)
+     2. aboutus-story-body    — image + narrative, two-column
+     3. aboutus-story-closing — closing statement + CTA
+   No copy was changed; only how it is grouped, spaced, and styled.
+==================================== */
+.aboutus-story-section {
+  padding: var(--section-spacing) 0;
+}
+
+.aboutus-story-header {
+  max-width: 760px;
+  margin: 0 auto calc(var(--section-spacing) / 1.1);
+  text-align: center;
+}
+
+.aboutus-story-header .section-title {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.aboutus-story-lead {
+  font-family: var(--primary-font);
+  font-size: 1.4rem;
+  line-height: 1.65;
+  color: var(--dark-color);
+  font-style: italic;
+  margin: 0;
+}
+
+.aboutus-story-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: calc(var(--base-spacing) * 2);
+}
+
+.aboutus-story-image,
+.aboutus-story-content {
+  flex: 1 1 400px;
+}
+
+.aboutus-story-image img {
+  width: 100%;
+  aspect-ratio: 7360 / 4912;
+  object-fit: cover;
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.4s ease;
+}
+
+.aboutus-story-image img:hover {
+  transform: scale(1.02);
+}
+
+.aboutus-story-content p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--dark-color);
+  margin-bottom: var(--base-spacing);
+}
+
+.aboutus-story-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Decorative rhythm-break between the two narrative beats in the
+   right-hand column — purely visual, no text. */
+.aboutus-story-divider {
+  display: block;
+  width: 48px;
+  height: 3px;
+  margin: calc(var(--base-spacing) * 1.25) 0;
+  background: var(--accent-color);
+  border-radius: 2px;
+}
+
+.aboutus-story-closing {
+  max-width: 720px;
+  margin: calc(var(--section-spacing) / 1.1) auto 0;
+  padding-top: calc(var(--section-spacing) / 1.1);
+  border-top: 1px solid rgba(2, 6, 111, 0.1);
+  text-align: center;
+}
+
+.aboutus-story-closing p {
+  font-family: var(--primary-font);
+  font-size: 1.2rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--primary-color);
+  margin-bottom: var(--base-spacing);
+}
+
+/* ===================================
+   Who We Are Section (Reverse Layout)
+==================================== */
+.aboutus-who-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--base-spacing);
+  padding: var(--section-spacing) 0;
+}
+
+.aboutus-section--reverse {
+  flex-direction: row-reverse;
+}
+
+.aboutus-who-content,
+.aboutus-who-image {
+  flex: 1 1 400px;
+}
+
+.aboutus-who-content h2 {
+  font-size: 2rem;
+  margin-bottom: var(--base-spacing);
+  color: var(--primary-color);
+  font-family: var(--primary-font);
+}
+
+.aboutus-who-content p {
+  font-size: 1.1rem;
+  margin-bottom: var(--base-spacing);
+}
+
+.aboutus-who-image img {
+  width: 100%;
+  aspect-ratio: 7360 / 4912;
+  object-fit: cover;
+  border-radius: var(--card-radius);
+  transition: transform 0.4s ease;
+}
+
+.aboutus-who-image img:hover {
+  transform: scale(1.02);
+}
+
+/* ===================================
+   Mission & Vision Section
+==================================== */
+.aboutus-mv-section {
+  padding: var(--section-spacing) 0;
+  text-align: center;
+  border-top: 1px solid rgba(2, 6, 111, 0.08);
+}
+
+.aboutus-mv-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--base-spacing);
+  justify-content: center;
+  margin-top: var(--base-spacing);
+}
+
+.aboutus-mv-card {
+  background-color: var(--white);
+  border-radius: var(--card-radius);
+  box-shadow: var(--box-shadow);
+  width: 380px;
+  max-width: 100%;
+  padding: calc(var(--base-spacing) * 1.5) var(--base-spacing);
+  transition:
+    transform var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease;
+}
+
+.aboutus-mv-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.aboutus-mv-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--base-spacing);
+  border-radius: 50%;
+  background: var(--light-color);
+  color: var(--primary-color);
+}
+
+.aboutus-mv-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: calc(var(--base-spacing) / 2);
+  color: var(--primary-color);
+  font-family: var(--primary-font);
+}
+
+.aboutus-mv-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* ===================================
+   Core Values Section
+==================================== */
+.aboutus-values-section {
+  padding: var(--section-spacing) 0;
+  text-align: center;
+}
+
+.aboutus-values-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--base-spacing);
+  justify-content: center;
+  margin-top: var(--base-spacing);
+}
+
+.aboutus-value-card {
+  background-color: var(--white);
+  border-radius: var(--card-radius);
+  box-shadow: var(--box-shadow);
+  width: 220px;
+  max-width: 100%;
+  padding: var(--base-spacing);
+  transition:
+    transform var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease;
+}
+
+.aboutus-value-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.aboutus-value-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto calc(var(--base-spacing) / 1.5);
+  border-radius: 50%;
+  background: var(--light-color);
+  color: var(--secondary-color);
+}
+
+.aboutus-value-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: calc(var(--base-spacing) / 3);
+  color: var(--primary-color);
+  font-family: var(--primary-font);
+}
+
+.aboutus-value-card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ===================================
+   Brand Tagline Banner
+==================================== */
+.aboutus-tagline-banner {
+  padding: calc(var(--section-spacing) / 1.5) var(--base-spacing);
+  text-align: center;
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.aboutus-tagline-brand {
+  font-size: 1.1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: calc(var(--base-spacing) / 3);
+  opacity: 0.85;
+}
+
+.aboutus-tagline-text {
+  font-size: 1.75rem;
+  font-family: var(--primary-font);
+  font-weight: 600;
+  margin: 0;
+}
+
+/* ===================================
+   What We Offer Section with Service Cards
+==================================== */
+.aboutus-offer-section {
+  padding: var(--section-spacing) 0;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: var(--base-spacing);
+  color: var(--primary-color);
+  position: relative;
+  font-family: var(--primary-font);
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--secondary-color);
+  margin: 8px auto 0;
+  border-radius: 2px;
+}
+
+.aboutus-offer-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--base-spacing);
+  justify-content: center;
+  margin-top: var(--base-spacing);
+}
+
+.aboutus-offer-card {
+  background-color: var(--white);
+  border-radius: var(--card-radius);
+  box-shadow: var(--box-shadow);
+  width: 320px;
+  overflow: hidden;
+  transition:
+    transform var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease;
+  margin: 0 auto;
+}
+
+.aboutus-offer-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.aboutus-offer-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.aboutus-offer-card h3 {
+  font-size: 1.5rem;
+  margin: var(--base-spacing) 0;
+  color: var(--primary-color);
+  font-family: var(--primary-font);
+}
+
+.aboutus-offer-card p {
+  font-size: 1rem;
+  padding: 0 var(--base-spacing) var(--base-spacing);
+}
+
+/* ===================================
+   Testimonials Section
+==================================== */
+.aboutus-testimonials {
+  padding: var(--section-spacing) 0;
+  background-color: var(--light-color);
+  text-align: center;
+}
+
+.aboutus-testimonial-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--base-spacing);
+  justify-content: center;
+  margin-top: var(--base-spacing);
+}
+
+/* ===================================
+   Contact CTA Section
+   (replaces the former duplicate contact form + map block, which is
+   now solely on ContactUs.jsx — Package 4.5)
+==================================== */
+.aboutus-contact-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--section-spacing) 0;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.aboutus-contact-cta h2 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  color: var(--primary-color);
+  font-family: var(--primary-font);
+}
+
+.aboutus-contact-cta p {
+  font-size: 1.1rem;
+  margin-bottom: var(--base-spacing);
+  max-width: 620px;
+}
+
+.aboutus-contact-cta .ui-btn {
+  margin: 0 auto;
+}
+
+.aboutus-testimonial-carousel {
+  margin-top: var(--base-spacing);
+}
+
+/* ===================================
+   Hover & Link Utilities
+==================================== */
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: color var(--transition-speed) ease;
+}
+
+a:hover {
+  color: var(--accent-color);
+}
+
+/* ===================================
+   Responsive Design
+==================================== */
+@media (max-width: 768px) {
+  .aboutus-hero h1 {
+    font-size: 2.5rem;
+  }
+  .aboutus-hero-subtitle {
+    font-size: 1rem;
+  }
+  .aboutus-story-lead {
+    font-size: 1.2rem;
+  }
+  .aboutus-story-body,
+  .aboutus-who-section {
+    flex-direction: column;
+    text-align: center;
+  }
+  .aboutus-story-image,
+  .aboutus-story-content,
+  .aboutus-who-content,
+  .aboutus-who-image {
+    flex: 1 1 100%;
+  }
+  .aboutus-story-closing p {
+    font-size: 1.05rem;
+  }
+}

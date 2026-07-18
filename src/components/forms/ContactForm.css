@@ -1,0 +1,48 @@
+/* src/components/forms/ContactForm.css
+   Package 4.5 — shared contact form card, consumed by ContactUs.jsx
+   (primary) and linked to from AboutUs.jsx (which no longer embeds its
+   own copy of this form). */
+
+.contact-form-card {
+  background-color: var(--white);
+  border-radius: var(--card-radius);
+  box-shadow: var(--box-shadow);
+  padding: var(--base-spacing);
+}
+
+.contact-form-card__heading {
+  font-size: 2rem;
+  margin: 0 0 8px;
+  color: var(--primary-color);
+  font-family: var(--primary-font);
+}
+
+.contact-form-card__description {
+  font-size: 1rem;
+  color: var(--dark-color);
+  margin: 0 0 var(--base-spacing);
+}
+
+.contact-form-card__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--base-spacing);
+}
+
+.contact-form-card__success {
+  color: #1f7a3d;
+  background: #e9f7ee;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.contact-form-card__error {
+  color: #a33025;
+  background: #fdecea;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  margin: 0;
+}

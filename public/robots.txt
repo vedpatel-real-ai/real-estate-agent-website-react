@@ -1,0 +1,8 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow: /admin
+Disallow: /admin-secret-upload
+Disallow: /admin-register
+Disallow: /mppateL123
+
+Sitemap: /sitemap.xml

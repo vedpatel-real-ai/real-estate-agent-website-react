@@ -1,0 +1,128 @@
+/* src/components/Footer.css */
+.footer {
+  background-color: var(--bg-dark);
+  color: var(--white);
+  padding: var(--section-spacing) var(--base-spacing);
+  font-family: var(--font-body);
+  text-align: center; /* Center text by default for mobile */
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--base-spacing);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: var(--base-spacing);
+}
+
+.footer-col {
+  flex: 1 1 100%;
+  max-width: 350px;
+  margin: var(--base-spacing) 0;
+}
+
+.footer-col h4 {
+  margin-bottom: var(--base-spacing);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 12px;
+}
+
+.footer-links li a {
+  color: var(--white);
+  text-decoration: none;
+  transition: all var(--transition-speed);
+}
+
+.footer-links li a:hover {
+  color: var(--accent-color);
+}
+
+.footer-newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+  align-items: stretch;
+}
+
+.footer-newsletter-input {
+  margin-bottom: 0;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.social-icons a {
+  color: var(--white);
+  font-size: 1.6rem;
+  transition: all var(--transition-speed);
+}
+
+.social-icons a:hover {
+  color: var(--accent-color);
+  transform: scale(1.1);
+}
+
+/* WhatsApp keeps its own brand-green hover instead of the site's gold
+   accent, matching the button treatment used in NavigationBar.css. */
+.social-icons a.social-icon-whatsapp:hover {
+  color: #25D366;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: var(--base-spacing);
+  margin-top: var(--base-spacing);
+  font-size: 0.95rem;
+}
+
+.footer-bottom span {
+  color: var(--accent-color);
+}
+
+/* ==================================================
+   Media Query for Larger Screens
+================================================== */
+@media (min-width: 768px) {
+  .footer {
+    text-align: left;
+    padding: calc(var(--section-spacing) + 20px) var(--base-spacing);
+  }
+  
+  .footer-container {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+  
+  .footer-col {
+    flex: 1 1 280px;
+    margin: var(--base-spacing) 0;
+    max-width: none;
+  }
+  
+  .footer-newsletter-form {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .footer-newsletter-input {
+    max-width: 70%;
+  }
+}

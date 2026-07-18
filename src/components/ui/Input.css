@@ -1,0 +1,73 @@
+/* src/components/ui/Input.css */
+
+.ui-field {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.ui-field--full {
+  width: 100%;
+}
+
+.ui-field__label {
+  font-family: var(--body-font);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+.ui-field__required {
+  color: var(--color-danger);
+}
+
+.ui-field__input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  font-family: var(--body-font);
+  font-size: 1rem;
+  color: var(--dark-color);
+  background-color: var(--white);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast) ease,
+              box-shadow var(--transition-fast) ease;
+}
+
+.ui-field__input::placeholder {
+  color: var(--gray-400);
+}
+
+.ui-field__input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(2, 6, 111, 0.1);
+}
+
+.ui-field--error .ui-field__input {
+  border-color: var(--color-danger);
+}
+
+.ui-field--error .ui-field__input:focus {
+  box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.12);
+}
+
+.ui-field--disabled .ui-field__input {
+  background-color: var(--gray-100);
+  color: var(--gray-500);
+  cursor: not-allowed;
+}
+
+.ui-field__helper {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--gray-500);
+}
+
+.ui-field__error {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--color-danger);
+  font-weight: 500;
+}

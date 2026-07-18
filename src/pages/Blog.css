@@ -1,0 +1,384 @@
+/* src/pages/Blog.css
+   Styling/structure pass over the Package 4.4 rebuild. Same layout
+   concept — hero + category chips + responsive grid, matching the
+   `.container` pattern `Properties.css` (4.2) established — reworked
+   with a consistent spacing rhythm, a clearer type scale, and more
+   deliberate hover/focus/empty states so the page reads as a finished
+   product rather than a first pass. No functional behavior changes;
+   this file only affects appearance. */
+
+.blog-page {
+  font-family: var(--body-font);
+  color: var(--dark-color);
+  line-height: 1.6;
+  background-color: var(--neutral-light);
+}
+
+/* ==========================================================
+   Hero
+   ========================================================== */
+
+.blog-hero {
+  position: relative;
+  min-height: 320px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  text-align: center;
+  background-image: url('https://placehold.co/1600x900/F5F1EA/2F3A36?text=Demo+Real+Estate+Blog');
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  padding: var(--spacing-xl) var(--spacing-sm) var(--spacing-lg);
+}
+
+.blog-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(2, 6, 111, 0.72) 0%, rgba(2, 6, 111, 0.82) 100%);
+  z-index: 1;
+}
+
+.blog-hero__content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.blog-breadcrumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.blog-breadcrumb a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.blog-breadcrumb a:hover {
+  color: var(--white);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.blog-breadcrumb__sep {
+  opacity: 0.5;
+}
+
+.blog-breadcrumb [aria-current='page'] {
+  color: var(--white);
+  font-weight: 600;
+}
+
+.blog-hero__eyebrow {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--accent-color);
+  margin-bottom: 12px;
+}
+
+.blog-hero h1 {
+  font-family: var(--heading-font);
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  line-height: 1.15;
+  margin-bottom: 14px;
+  color: var(--white);
+}
+
+.blog-hero__subtitle {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 28px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.blog-hero__search {
+  display: flex;
+  align-items: stretch;
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--white);
+  box-shadow: var(--shadow-medium);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.blog-hero__search-icon {
+  align-self: center;
+  margin-left: 16px;
+  color: var(--neutral-dark);
+  flex-shrink: 0;
+}
+
+.blog-hero__search input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  padding: 14px 12px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--dark-color);
+  background: transparent;
+}
+
+.blog-hero__search input:focus {
+  outline: none;
+}
+
+.blog-hero__search:focus-within {
+  box-shadow: 0 0 0 2px var(--accent-color), var(--shadow-medium);
+}
+
+.blog-hero__search input::placeholder {
+  color: var(--neutral-dark);
+  opacity: 0.7;
+}
+
+.blog-hero__search button {
+  border: none;
+  background: var(--accent-color);
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0 26px;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.blog-hero__search button:hover {
+  background: var(--secondary-color);
+}
+
+.blog-hero__search button:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: -4px;
+}
+
+/* ==========================================================
+   Main / toolbar
+   ========================================================== */
+
+.blog-main {
+  padding-top: var(--spacing-lg);
+  padding-bottom: calc(var(--spacing-xl) * 1.25);
+}
+
+.blog-category-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--neutral-medium);
+}
+
+.blog-category-chip {
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid var(--neutral-medium);
+  background-color: var(--white);
+  color: var(--dark-color);
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast),
+    color var(--transition-fast), transform var(--transition-fast);
+}
+
+.blog-category-chip:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-1px);
+}
+
+.blog-category-chip:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+.blog-category-chip.is-active {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--white);
+  transform: none;
+}
+
+/* ==========================================================
+   Results grid
+   ========================================================== */
+
+.blog-results {
+  min-height: 240px;
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-lg) var(--spacing-md);
+  transition: opacity var(--transition-fast);
+}
+
+.blog-grid.is-refetching {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* ==========================================================
+   Skeleton loading state
+   ========================================================== */
+
+.blog-skeleton-card {
+  background-color: var(--white);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  border: 1px solid var(--neutral-medium);
+}
+
+.blog-skeleton-card__body {
+  padding: 1.25rem 1.4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+/* ==========================================================
+   Empty / error states
+   ========================================================== */
+
+.blog-empty-state,
+.blog-error {
+  text-align: center;
+  padding: calc(var(--spacing-xl) * 1.1) var(--spacing-md);
+  background-color: var(--white);
+  border-radius: var(--card-radius);
+  border: 1px dashed var(--neutral-medium);
+}
+
+.blog-empty-state__icon-wrap {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1.25rem;
+  border-radius: 50%;
+  background-color: var(--neutral-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blog-empty-state__icon {
+  color: var(--neutral-dark);
+}
+
+.blog-empty-state h3 {
+  font-family: var(--heading-font);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-empty-state p {
+  color: var(--neutral-dark);
+  margin-bottom: 1.5rem;
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.blog-empty-state__reset {
+  border: 1px solid var(--primary-color);
+  background: transparent;
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.65rem 1.5rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.blog-empty-state__reset:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.blog-error {
+  color: var(--dark-color);
+  font-weight: 500;
+}
+
+/* ==========================================================
+   Pagination
+   ========================================================== */
+
+.blog-pagination {
+  margin-top: var(--spacing-xl);
+}
+
+/* ==========================================================
+   Responsive
+   ========================================================== */
+
+@media (max-width: 1024px) {
+  .blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .blog-hero {
+    min-height: 260px;
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+
+  .blog-hero__search {
+    flex-wrap: nowrap;
+  }
+
+  .blog-hero__search-icon {
+    display: none;
+  }
+
+  .blog-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-category-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: var(--spacing-sm);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .blog-category-chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  .blog-category-chip {
+    flex-shrink: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-category-chip,
+  .blog-grid,
+  .blog-hero__search button,
+  .blog-empty-state__reset {
+    transition: none;
+  }
+}
